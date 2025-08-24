@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://djilf6x3jg8x4"]
+
+[ext_resource type="Shader" uid="uid://d1lykn6h2myh" path="res://shaders/stars_shader.tres" id="1_6ovqj"]
+[ext_resource type="Texture2D" uid="uid://c2e3o23gjeu5y" path="res://assets/stars_albedo.png" id="2_rl6pj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6ovqj")
+shader_parameter/Albedo = ExtResource("2_rl6pj")
+shader_parameter/EmissionMultiplier = 1.0
+shader_parameter/ShineMaskSpeedMultiplier = 1.0
+shader_parameter/ShineMaskMultiplier = 1.0
+shader_parameter/HorizonMaskHeight = 0.372
