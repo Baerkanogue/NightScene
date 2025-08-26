@@ -49,7 +49,7 @@ input_name = "time"
 operator = 4
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_tbggt"]
-size = Vector2(784, 482)
+size = Vector2(784, 892)
 title = "Albedo"
 attached_nodes = PackedInt32Array(2, 12, 32, 34)
 
@@ -101,7 +101,7 @@ linked_parent_graph_frame = 39
 constant = 8.0
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_o345y"]
-size = Vector2(1244, 402)
+size = Vector2(1244, 660)
 title = "Emission"
 attached_nodes = PackedInt32Array(37, 36, 38, 35, 41, 52)
 
@@ -161,8 +161,8 @@ default_value = 1.0
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_r8ocp"]
 gradient = SubResource("Gradient_o4i5q")
-fill_from = Vector2(1, 0.833333)
-fill_to = Vector2(1, 0.628205)
+fill_from = Vector2(1, 0.824786)
+fill_to = Vector2(1, 0.641026)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8tvxs"]
 output_port_for_preview = 0
@@ -195,7 +195,7 @@ operator = 2
 input_name = "uv"
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_rj27e"]
-size = Vector2(564, 242)
+size = Vector2(564, 403)
 title = "Instance"
 attached_nodes = PackedInt32Array(5, 20)
 
@@ -206,7 +206,7 @@ texture = ExtResource("2_o4i5q")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_ktjmb"]
-size = Vector2(564, 242)
+size = Vector2(564, 403)
 title = "Mask"
 attached_nodes = PackedInt32Array(7, 13)
 
@@ -215,7 +215,7 @@ input_name = "uv"
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_add, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
 uniform sampler2D Albedo : source_color, filter_nearest, repeat_enable;
 uniform sampler2D tex_frg_32 : source_color;
@@ -365,6 +365,8 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-645.692, -248.321)
+modes/blend = 1
 nodes/fragment/0/position = Vector2(1960, 60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_akwc0")
 nodes/fragment/2/position = Vector2(-280, 500)

@@ -10,6 +10,7 @@
 [ext_resource type="Gradient" uid="uid://bfkfkcyuxdvql" path="res://shaders/skygradient.tres" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://buhk4n3c01lp" path="res://shaders/moon_noise.tres" id="8_85g3d"]
 [ext_resource type="Shader" uid="uid://cs1el2dl7xiww" path="res://shaders/cloud.tres" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://bn37sr02nog2c" path="res://assets/lamp_post.glb" id="11_ya4ey"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jyhfs"]
 
@@ -20,6 +21,14 @@ sky_material = SubResource("ProceduralSkyMaterial_jyhfs")
 background_mode = 2
 sky = SubResource("Sky_jyhfs")
 ambient_light_sky_contribution = 0.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+glow_intensity = 0.2
+glow_strength = 0.6
+glow_blend_mode = 1
+volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="TorusMesh" id="TorusMesh_7dm0k"]
 material = ExtResource("3_tbgi4")
@@ -70,10 +79,14 @@ radial_segments = 32
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
 render_priority = 0
 shader = ExtResource("9_choun")
-shader_parameter/TimeAxisScale = Vector2(0.01, 0.02)
-shader_parameter/TimeGlobalScale = 0.5
-shader_parameter/DeformationAmplitude = 0.2
-shader_parameter/CloudSize = 1.0
+shader_parameter/DisplacementSpeed = Vector2(0.01, 0.02)
+shader_parameter/DisplacementSpeedGlobal = 0.5
+shader_parameter/DeformationAmplitude = 0.16
+shader_parameter/GlobalSize = 1.88
+shader_parameter/AlphaSpeedGlobal = 1.0
+shader_parameter/AlphaSpeed = Vector2(1, 1)
+shader_parameter/AlphaAdder = 0.47
+shader_parameter/AlphaMulitplier = 0.81
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_eb6dy"]
 material = SubResource("ShaderMaterial_ya4ey")
@@ -88,9 +101,6 @@ height = 0.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyhfs"]
 radius = 0.125
 height = 0.5
-
-[sub_resource type="MultiMesh" id="MultiMesh_tipki"]
-transform_format = 1
 
 [node name="Main" type="Node3D"]
 
@@ -125,7 +135,7 @@ size = 3.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.433037, 0.362631, -1.58893e-08, 0, -2.52215e-08, -0.579, -0.362631, 0.433037, -1.89768e-08, 1.80221, 0, 0)
+transform = Transform3D(0.246599, 0.50509, -2.21461e-08, 0, -2.52215e-08, -0.579, -0.50509, 0.246599, -1.08147e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -175,7 +185,7 @@ spot_angle = 58.7157
 metadata/_edit_lock_ = true
 
 [node name="Cloud" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.80711, 0.880098, -2.68401)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.777702, 0.557304, -2.47276)
 layers = 4
 mesh = SubResource("CapsuleMesh_eb6dy")
 
@@ -190,6 +200,19 @@ spot_attenuation = 4.41
 spot_angle = 63.75
 spot_angle_attenuation = 1.36604
 
+[node name="LampPost" parent="Geometry" instance=ExtResource("11_ya4ey")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -1.9435, -1.018, 0.267571)
+
+[node name="Circle" parent="Geometry/LampPost" index="0"]
+transform = Transform3D(-0.507538, 0, 0.861629, 0, 1, 0, -0.861629, 0, -0.507538, 0, 0, 0)
+
+[node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28892, 0)
+light_color = Color(1, 0.94, 0.64, 1)
+light_cull_mask = 1
+omni_range = 4.703
+omni_attenuation = 1.86
+
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("4_jyhfs")
 
@@ -199,6 +222,4 @@ mesh = SubResource("CapsuleMesh_tbgi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_jyhfs")
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02719, 0, 0)
-multimesh = SubResource("MultiMesh_tipki")
+[editable path="Geometry/LampPost"]
