@@ -16,9 +16,9 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=240
 config/icon="res://assets/icon.svg"
 
-[debug]
+[autoload]
 
-gdscript/warnings/untyped_declaration=1
+Utils="*res://scripts/utils.gd"
 
 [display]
 

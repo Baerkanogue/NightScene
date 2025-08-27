@@ -137,7 +137,7 @@ operator = 2
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_always, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled, ambient_light_disabled;
+render_mode blend_mix, depth_draw_always, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled, ambient_light_disabled, alpha_to_coverage_and_one;
 
 uniform vec2 DisplacementSpeed = vec2(0.010000, 0.020000);
 uniform float DisplacementSpeedGlobal : hint_range(0.0, 10.0) = 0.5;
@@ -298,10 +298,10 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1932.92, 29.0505)
 modes/depth_draw = 1
 flags/shadows_disabled = true
 flags/ambient_light_disabled = true
+flags/alpha_to_coverage_and_one = true
 nodes/vertex/0/position = Vector2(640, 140)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_hyg1r")
 nodes/vertex/2/position = Vector2(-720, -20)
