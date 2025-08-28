@@ -142,7 +142,7 @@ size = 3.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(-0.449322, 0.323721, -1.41876e-08, 0, -2.52215e-08, -0.579, -0.323721, -0.449322, 1.96873e-08, 1.80221, 0, 0)
+transform = Transform3D(0.539752, -0.122751, 5.3795e-09, 0, -2.52215e-08, -0.579, 0.122751, 0.539752, -2.36418e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -220,7 +220,7 @@ transform = Transform3D(-0.507538, 0, 0.861629, 0, 1, 0, -0.861629, 0, -0.507538
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.02136
+light_energy = 1.05614
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -240,7 +240,7 @@ script = ExtResource("14_a8y0u")
 mesh_instance = NodePath("FireflyMesh")
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Firefly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0355368, 0, 0.297888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0292302, 0.0725471, -0.298573)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../..")
 

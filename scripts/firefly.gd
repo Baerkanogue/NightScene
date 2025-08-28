@@ -4,8 +4,12 @@ extends Node3D
 
 @export var mesh_instance: MeshInstance3D
 @export_group("Movement")
+@export_subgroup("BaseMovement")
 @export_range(0.0, 0.5, 0.01) var radius: float = 0.3
 @export_range(0.0, 2.5, 0.01) var speed: float = 1.0
+@export_subgroup("Y-Axis Sine")
+@export_range(0.0, 0.3, 0.01) var amplitude: float = 0.1
+@export_range(0.0, 5.0, 0.01) var frequency: float = 1.0
 
 var mat: ShaderMaterial
 var sprite_color: Color
@@ -15,6 +19,7 @@ var sprite_emission_mulitplier : float
 var are_shader_params_ready: bool = false
 
 var angle: float = 0.0
+var phase: float = 0.0
 
 @onready var firefly_omni_light_3d: OmniLight3D = $FireflyMesh/FireflyOmniLight3D
 
@@ -42,7 +47,17 @@ func go_round(delta: float) -> void:
 	var x: float = self.global_position.x + radius * cos(angle)
 	var z: float = self.global_position.z + radius * sin(angle)
 	
-	mesh_instance.global_position = Vector3(x, mesh_instance.global_position.y, z)
+	var y: float = self.global_position.y + y_sine_transform(delta)
+	
+	mesh_instance.global_position = Vector3(x, y, z)
+
+
+func y_sine_transform(delta: float) -> float:
+	var y_offset: float = 0.0
+	phase += frequency * delta
+	phase = fmod(phase, TAU)
+	y_offset = sin(phase) * amplitude
+	return y_offset
 
 
 func shader_params_safe_loader() -> bool:
