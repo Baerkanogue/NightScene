@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c767gftlx7pa3"]
+
+[ext_resource type="Shader" uid="uid://obf2srcjxam6" path="res://shaders/firefly_shader.tres" id="1_7swbb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7swbb")
+shader_parameter/Color = Color(1, 0.883, 0.61, 1)
+shader_parameter/Size = 1.0
+shader_parameter/AlphaMultiplier = 1.0
+shader_parameter/EmissionMultiplier = 1.0

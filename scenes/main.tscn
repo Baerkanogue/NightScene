@@ -5,14 +5,15 @@
 [ext_resource type="Material" uid="uid://bwd5y5xb21k55" path="res://shaders/test_mat.tres" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://2o0jam4uui6g" path="res://scripts/player.gd" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://c6prieybccnev" path="res://scripts/geometry.gd" id="4_tbgi4"]
-[ext_resource type="Shader" uid="uid://bl1q2c6uahpkh" path="res://shaders/sky.tres" id="5_o6xl0"]
+[ext_resource type="Shader" uid="uid://bl1q2c6uahpkh" path="res://shaders/sky_shader.tres" id="5_o6xl0"]
 [ext_resource type="Material" uid="uid://djilf6x3jg8x4" path="res://shaders/stars_mat.tres" id="6_o6xl0"]
 [ext_resource type="Gradient" uid="uid://bfkfkcyuxdvql" path="res://shaders/skygradient.tres" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://buhk4n3c01lp" path="res://shaders/moon_noise.tres" id="8_85g3d"]
-[ext_resource type="Shader" uid="uid://cs1el2dl7xiww" path="res://shaders/cloud.tres" id="9_choun"]
+[ext_resource type="Shader" uid="uid://cs1el2dl7xiww" path="res://shaders/cloud_shader.tres" id="9_choun"]
 [ext_resource type="Script" uid="uid://daffk25rg06r0" path="res://scripts/lamp_post.gd" id="11_trceg"]
 [ext_resource type="PackedScene" uid="uid://bn37sr02nog2c" path="res://assets/lamp_post.glb" id="11_ya4ey"]
-[ext_resource type="Shader" uid="uid://obf2srcjxam6" path="res://shaders/firefly.tres" id="12_eb6dy"]
+[ext_resource type="Material" uid="uid://c767gftlx7pa3" path="res://shaders/firefly_mat.tres" id="13_a8y0u"]
+[ext_resource type="Script" uid="uid://dmhdlcg4472eb" path="res://scripts/firefly.gd" id="14_a8y0u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jyhfs"]
 
@@ -104,17 +105,9 @@ height = 0.5
 radius = 0.125
 height = 0.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
-render_priority = 0
-shader = ExtResource("12_eb6dy")
-shader_parameter/Color = Color(1, 0.883, 0.61, 1)
-shader_parameter/Size = 1.0
-shader_parameter/AlphaMultiplier = 1.0
-shader_parameter/EmissionMultiplier = 1.0
-
 [sub_resource type="QuadMesh" id="QuadMesh_ya4ey"]
-material = SubResource("ShaderMaterial_trceg")
-size = Vector2(0.1, 0.1)
+material = ExtResource("13_a8y0u")
+size = Vector2(0.05, 0.05)
 
 [node name="Main" type="Node3D"]
 
@@ -149,7 +142,7 @@ size = 3.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(-0.509515, -0.226693, 9.93374e-09, 0, -2.52215e-08, -0.579, 0.226693, -0.509515, 2.23318e-08, 1.80221, 0, 0)
+transform = Transform3D(-0.449322, 0.323721, -1.41876e-08, 0, -2.52215e-08, -0.579, -0.323721, -0.449322, 1.96873e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -215,7 +208,7 @@ spot_angle = 63.75
 spot_angle_attenuation = 1.36604
 
 [node name="LampPost" parent="Geometry" node_paths=PackedStringArray("light") instance=ExtResource("11_ya4ey")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -1.9435, -1.018, 0.267571)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -2, -1, 0.25)
 script = ExtResource("11_trceg")
 light = NodePath("Circle/LampOmniLight3D")
 amplitude = 0.2
@@ -225,9 +218,9 @@ frequency = 1.25
 transform = Transform3D(-0.507538, 0, 0.861629, 0, 1, 0, -0.861629, 0, -0.507538, 0, 0, 0)
 
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
-transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.28892, 0)
+transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 0.969425
+light_energy = 1.02136
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -241,16 +234,22 @@ mesh = SubResource("CapsuleMesh_tbgi4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_jyhfs")
 
-[node name="Firefly" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.470403, -0.724586, 0.239515)
-mesh = SubResource("QuadMesh_ya4ey")
+[node name="Firefly" type="Node3D" parent="." node_paths=PackedStringArray("mesh_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.789024, 0.25)
+script = ExtResource("14_a8y0u")
+mesh_instance = NodePath("FireflyMesh")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Firefly"]
+[node name="FireflyMesh" type="MeshInstance3D" parent="Firefly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0355368, 0, 0.297888)
+mesh = SubResource("QuadMesh_ya4ey")
+skeleton = NodePath("../..")
+
+[node name="FireflyOmniLight3D" type="OmniLight3D" parent="Firefly/FireflyMesh"]
 light_color = Color(1, 0.816667, 0.56, 1)
 light_energy = 0.015
 light_specular = 10.0
 light_cull_mask = 1
-omni_range = 0.175
+omni_range = 0.25
 omni_attenuation = 1.232
 
 [editable path="Geometry/LampPost"]

@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://obf2srcjxam6"]
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://obf2srcjxam6"]
 
-[ext_resource type="Texture2D" uid="uid://b3rxvfo50qqjq" path="res://assets/firefly_big.png" id="1_2blk1"]
-[ext_resource type="Texture2D" uid="uid://b6ggvvfsanqs7" path="res://assets/firefly_small.png" id="2_vsi0v"]
+[ext_resource type="Texture2D" uid="uid://b3rxvfo50qqjq" path="res://assets/firefly_big.png" id="1_hwt7o"]
+[ext_resource type="Texture2D" uid="uid://b6ggvvfsanqs7" path="res://assets/firefly_small.png" id="2_c1bvd"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_2blk1"]
 operator = 2
@@ -28,11 +28,11 @@ default_value_enabled = true
 default_value = 1.0
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_d8ira"]
-texture = ExtResource("1_2blk1")
+texture = ExtResource("1_hwt7o")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7f72l"]
-texture = ExtResource("2_vsi0v")
+texture = ExtResource("2_c1bvd")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_rqqag"]
@@ -56,6 +56,8 @@ max = 1.2
 default_value_enabled = true
 default_value = 1.0
 
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_hwt7o"]
+
 [resource]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled, alpha_to_coverage_and_one;
@@ -68,6 +70,21 @@ uniform float AlphaMultiplier : hint_range(0.0, 1.0) = 1.0;
 uniform float EmissionMultiplier : hint_range(0.0, 3.0) = 1.0;
 
 
+
+void vertex() {
+	mat4 n_out4p0;
+// GetBillboardMatrix:4
+	{
+		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
+		n_out4p0 = __mvm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out4p0;
+
+
+}
 
 void fragment() {
 // ColorParameter:12
@@ -129,9 +146,11 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1041.37, 119.752)
 flags/shadows_disabled = true
 flags/alpha_to_coverage_and_one = true
+nodes/vertex/4/node = SubResource("VisualShaderNodeBillboard_hwt7o")
+nodes/vertex/4/position = Vector2(80, 480)
+nodes/vertex/connections = PackedInt32Array(4, 0, 0, 10)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_d8ira")
 nodes/fragment/2/position = Vector2(-700, 480)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_7f72l")

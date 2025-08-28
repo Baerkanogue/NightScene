@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=37 format=3 uid="uid://cs1el2dl7xiww"]
 
-[ext_resource type="Texture2D" uid="uid://d7xhcd5pgewu" path="res://shaders/cloud_alpha_noise.tres" id="1_jnqfb"]
+[ext_resource type="Texture2D" uid="uid://d7xhcd5pgewu" path="res://shaders/cloud_alpha_noise.tres" id="1_s4wkv"]
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_jnqfb"]
 constant = 0.025
@@ -49,7 +49,7 @@ default_value = 1.0
 default_input_values = [2, true, 3, 0.1]
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_l0mml"]
-texture = ExtResource("1_jnqfb")
+texture = ExtResource("1_s4wkv")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_j2xdl"]

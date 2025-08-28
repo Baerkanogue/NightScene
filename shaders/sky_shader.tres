@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://bl1q2c6uahpkh"]
 
-[ext_resource type="Gradient" uid="uid://bfkfkcyuxdvql" path="res://shaders/skygradient.tres" id="1_gcbxl"]
+[ext_resource type="Gradient" uid="uid://bfkfkcyuxdvql" path="res://shaders/skygradient.tres" id="1_vkxwk"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_gcbxl"]
 parameter_name = "SkyGradient"
@@ -8,7 +8,7 @@ texture_type = 1
 texture_repeat = 2
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ihfc1"]
-gradient = ExtResource("1_gcbxl")
+gradient = ExtResource("1_vkxwk")
 width = 128
 height = 128
 fill_from = Vector2(0, 0.653846)
