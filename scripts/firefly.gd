@@ -7,9 +7,11 @@ extends Node3D
 @export_subgroup("BaseMovement")
 @export_range(0.0, 0.5, 0.01) var radius: float = 0.3
 @export_range(0.0, 2.5, 0.01) var speed: float = 1.0
-@export_subgroup("Y-Axis Sine")
-@export_range(0.0, 0.3, 0.01) var amplitude: float = 0.1
-@export_range(0.0, 5.0, 0.01) var frequency: float = 1.0
+@export_subgroup("Y-Axis Sine", "y_")
+@export_range(0.0, 0.3, 0.01) var y_amplitude: float = 0.1
+@export_range(0.0, 5.0, 0.01) var y_frequency: float = 1.0
+@export_subgroup("Flicker", "flicker_")
+@export_range(0.0, 10.0, 0.01) var flicker_frequency: float = 0.1
 
 var mat: ShaderMaterial
 var sprite_color: Color
@@ -19,7 +21,8 @@ var sprite_emission_mulitplier : float
 var are_shader_params_ready: bool = false
 
 var angle: float = 0.0
-var phase: float = 0.0
+var y_phase: float = 0.0
+var flicker_phase: float = 0.0
 
 @onready var firefly_omni_light_3d: OmniLight3D = $FireflyMesh/FireflyOmniLight3D
 
@@ -39,6 +42,18 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	go_round(delta)
+	flicker(delta)
+
+
+func flicker(delta: float) -> void:
+	const MAX_SIZE: float = 0.9
+	const MIN_SIZE: float = 1.2
+	
+	flicker_phase += flicker_frequency * delta
+	flicker_phase = fmod(flicker_phase, TAU)
+	
+	var value: float = (sin(TAU * flicker_phase) + 1.0) * 0.5
+	mat.set_shader_parameter("Size", lerp(MAX_SIZE, MIN_SIZE, value))
 
 
 func go_round(delta: float) -> void:
@@ -54,9 +69,9 @@ func go_round(delta: float) -> void:
 
 func y_sine_transform(delta: float) -> float:
 	var y_offset: float = 0.0
-	phase += frequency * delta
-	phase = fmod(phase, TAU)
-	y_offset = sin(phase) * amplitude
+	y_phase += y_frequency * delta
+	y_phase = fmod(y_phase, TAU)
+	y_offset = sin(y_phase) * y_amplitude
 	return y_offset
 
 

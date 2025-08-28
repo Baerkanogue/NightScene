@@ -3,9 +3,9 @@ extends CharacterBody3D
 
 const WALK_SPEED: float = 1.35
 const WALK_ACCELERATION: float = 3.0
-const FRICTION: float = 3.5
 const JUMP_FORCE: float = 3.5
 
+var friction: float = 3.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta: float) -> void:
@@ -21,6 +21,11 @@ func movement_hander(delta: float) -> void:
 	else:
 		self.velocity.y -= gravity * delta
 	
+	if not self.is_on_floor():
+		friction = 0.5
+	else:
+		friction = 3.5
+		
 	# Horizontal movement.
 	var movement_vector: Vector3 = get_movement_vector()
 	var turnaround_boost: float = 1.0
@@ -29,7 +34,7 @@ func movement_hander(delta: float) -> void:
 			turnaround_boost *= 5.0
 		self.velocity = self.velocity.move_toward(movement_vector, WALK_ACCELERATION * turnaround_boost * delta)
 	else:
-		self.velocity = self.velocity.move_toward(Vector3(0.0, self.velocity.y, 0), FRICTION * delta)
+		self.velocity = self.velocity.move_toward(Vector3(0.0, self.velocity.y, 0), friction * delta)
 	
 	if is_on_floor_state and is_jump_requested():
 		velocity.y += JUMP_FORCE
