@@ -471,7 +471,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ids8r"]
 resource_local_to_scene = true
 noise_type = 3
-seed = -1944429448
+seed = 1510047515
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -869,7 +869,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1v6qk"]
 resource_local_to_scene = true
 noise_type = 3
-seed = 329526108
+seed = 449094929
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -944,7 +944,7 @@ size = 3.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(-0.550579, 0.0338478, -1.48626e-09, 0, -2.52215e-08, -0.579, -0.0338478, -0.550579, 2.41208e-08, 1.80221, 0, 0)
+transform = Transform3D(-0.0105645, -0.551259, 2.41531e-08, 0, -2.52215e-08, -0.579, 0.551259, -0.0105645, 4.66264e-10, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -1044,7 +1044,7 @@ transform = Transform3D(-0.507538, 0, 0.861629, 0, 1, 0, -0.861629, 0, -0.507538
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.08642
+light_energy = 0.9134
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -1064,11 +1064,29 @@ script = ExtResource("14_a8y0u")
 mesh_instance = NodePath("FireflyMesh")
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Firefly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165664, -0.0833702, -0.250111)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.165465, 0.0834142, 0.250243)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../..")
 
 [node name="FireflyOmniLight3D" type="OmniLight3D" parent="Firefly/FireflyMesh"]
+light_color = Color(1, 0.816667, 0.56, 1)
+light_energy = 0.015
+light_specular = 10.0
+light_cull_mask = 1
+omni_range = 0.25
+omni_attenuation = 1.232
+
+[node name="Firefly2" type="Node3D" parent="." node_paths=PackedStringArray("mesh_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.673788, 0.25)
+script = ExtResource("14_a8y0u")
+mesh_instance = NodePath("FireflyMesh")
+
+[node name="FireflyMesh" type="MeshInstance3D" parent="Firefly2"]
+transform = Transform3D(1.00001, -5.96046e-08, -1.01328e-06, -2.08616e-07, 1, -2.27374e-13, 1.01328e-06, 0, 1.00001, 0.250566, 0.0834142, 0.164975)
+mesh = SubResource("QuadMesh_ya4ey")
+skeleton = NodePath("../..")
+
+[node name="FireflyOmniLight3D" type="OmniLight3D" parent="Firefly2/FireflyMesh"]
 light_color = Color(1, 0.816667, 0.56, 1)
 light_energy = 0.015
 light_specular = 10.0

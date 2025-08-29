@@ -38,6 +38,9 @@ func _ready() -> void:
 	else:
 		mat = mesh_instance.mesh.surface_get_material(0)
 		are_shader_params_ready = true if shader_params_safe_loader() else false
+		
+		angle = randf()
+		speed += randf_range(-0.2, 0.2)
 
 
 func _process(delta: float) -> void:
@@ -57,7 +60,10 @@ func flicker(delta: float) -> void:
 
 
 func go_round(delta: float) -> void:
-	angle += speed * delta
+	if self.name == "Firefly2":
+		angle -= speed * delta
+	else:
+		angle += speed * delta
 	angle = fmod(angle, TAU)
 	var x: float = self.global_position.x + radius * cos(angle)
 	var z: float = self.global_position.z + radius * sin(angle)
