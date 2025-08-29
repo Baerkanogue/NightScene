@@ -40,7 +40,6 @@ func _ready() -> void:
 		are_shader_params_ready = true if shader_params_safe_loader() else false
 		
 		angle = randf()
-		speed += randf_range(-0.2, 0.2)
 
 
 func _process(delta: float) -> void:

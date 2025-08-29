@@ -6,6 +6,6 @@
 render_priority = 0
 shader = ExtResource("1_7swbb")
 shader_parameter/Color = Color(1, 0.883, 0.61, 1)
-shader_parameter/Size = 1.03516
+shader_parameter/Size = 0.900092
 shader_parameter/AlphaMultiplier = 1.0
 shader_parameter/EmissionMultiplier = 1.0
