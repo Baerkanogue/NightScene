@@ -481,7 +481,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ids8r"]
 resource_local_to_scene = true
 noise_type = 3
-seed = 61798029
+seed = 1600636552
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -879,7 +879,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1v6qk"]
 resource_local_to_scene = true
 noise_type = 3
-seed = 1174723298
+seed = 1953020079
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -934,7 +934,6 @@ initial_velocity_max = 6.6
 scale_min = 0.3
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_dp3eg")
-collision_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
 albedo_color = Color(0.7584, 0.81552, 0.96, 1)
@@ -945,6 +944,8 @@ roughness = 0.0
 material = SubResource("StandardMaterial3D_muem4")
 radius = 0.013
 height = 0.025
+radial_segments = 4
+rings = 2
 
 [sub_resource type="Curve" id="Curve_0ld40"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.879245, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55284, 0.0, 0, 0]
@@ -962,7 +963,6 @@ initial_velocity_max = 3.0
 scale_min = 0.3
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_gqmmt")
-collision_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_muem4"]
 size = Vector3(0.055, 0.305, 3.42)
@@ -1059,7 +1059,7 @@ far = 30.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.458704, -0.301055, 1.31811e-08, 0, -2.52215e-08, -0.579, 0.301055, 0.458704, -2.0078e-08, 1.80221, 0, 0)
+transform = Transform3D(0.517678, -0.180895, 7.9211e-09, 0, -2.52215e-08, -0.579, 0.180895, 0.517678, -2.26603e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -1163,7 +1163,7 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.07352
+light_energy = 1.06021
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -1175,7 +1175,7 @@ mesh_instance = NodePath("FireflyMesh")
 speed = 0.872206
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Geometry/LampPost/Firefly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215107, 0.081661, 0.209115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150928, 0.0242184, -0.259269)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../../../..")
 
@@ -1194,7 +1194,7 @@ mesh_instance = NodePath("FireflyMesh")
 speed = 1.09843
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Geometry/LampPost/Firefly2"]
-transform = Transform3D(1.00001, -5.96046e-08, -1.01328e-06, -2.08616e-07, 1, -2.27374e-13, 1.01328e-06, 0, 1.00001, 0.0768588, 0.081661, -0.289987)
+transform = Transform3D(1.00001, -5.96046e-08, -1.01328e-06, -2.08616e-07, 1, -2.27374e-13, 1.01328e-06, 0, 1.00001, -0.261627, 0.0242184, -0.146804)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../../../..")
 
@@ -1220,10 +1220,10 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost2/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.07352
+light_energy = 1.06021
 light_cull_mask = 1
 omni_range = 2.292
-omni_attenuation = 1.86
+omni_attenuation = 1.366
 
 [node name="Fountain" parent="Geometry" instance=ExtResource("14_jbj1t")]
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -0.919819, -1, -2.18951)
@@ -1259,7 +1259,7 @@ process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="Geometry/Fountain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0423162, 1.28753, -0.428546)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0423162, 1.28753, -0.393806)
 amount = 1000
 amount_ratio = 0.55
 fixed_fps = 60
