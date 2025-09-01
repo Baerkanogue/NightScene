@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=4 uid="uid://dd6tfjvemfxu"]
+[gd_scene load_steps=136 format=4 uid="uid://dd6tfjvemfxu"]
 
 [ext_resource type="Script" uid="uid://5bq4ewqqi03c" path="res://scripts/test_torus.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://ct6q0gda2r4ft" path="res://scripts/environment.gd" id="3_sugp2"]
@@ -18,6 +18,7 @@
 [ext_resource type="Shader" uid="uid://brtgmkopk4m17" path="res://shaders/grass.tres" id="15_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://ddg8xxsm3psdl" path="res://assets/fountain_fountain_normal.png" id="15_muem4"]
 [ext_resource type="Script" uid="uid://crwf1q5kjdgqm" path="res://scripts/grass_blade.gd" id="17_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://br3ons2r3sf8p" path="res://fence.blend" id="19_0ld40"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jyhfs"]
 
@@ -481,12 +482,12 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ids8r"]
 resource_local_to_scene = true
 noise_type = 3
-seed = -1773508841
+seed = 480691599
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dp3eg"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqmmt"]
 seamless = true
 seamless_blend_skirt = 0.319
 color_ramp = SubResource("Gradient_0loja")
@@ -497,7 +498,7 @@ render_priority = 0
 shader = SubResource("VisualShader_o7ddy")
 shader_parameter/DisplacementSpeed = Vector2(0.01, 0.02)
 shader_parameter/DisplacementSpeedGlobal = 0.5
-shader_parameter/VertexNoise = SubResource("NoiseTexture2D_dp3eg")
+shader_parameter/VertexNoise = SubResource("NoiseTexture2D_gqmmt")
 shader_parameter/DeformationAmplitude = 0.16
 shader_parameter/GlobalSize = 1.88
 shader_parameter/AlphaSpeedGlobal = 1.0
@@ -879,12 +880,12 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1v6qk"]
 resource_local_to_scene = true
 noise_type = 3
-seed = 1920904354
+seed = -1861771468
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0ld40"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yc10j"]
 seamless = true
 seamless_blend_skirt = 0.319
 color_ramp = SubResource("Gradient_dnhof")
@@ -895,7 +896,7 @@ render_priority = 0
 shader = SubResource("VisualShader_ids8r")
 shader_parameter/DisplacementSpeed = Vector2(0.01, 0.02)
 shader_parameter/DisplacementSpeedGlobal = 0.5
-shader_parameter/VertexNoise = SubResource("NoiseTexture2D_0ld40")
+shader_parameter/VertexNoise = SubResource("NoiseTexture2D_yc10j")
 shader_parameter/DeformationAmplitude = 0.215
 shader_parameter/GlobalSize = 0.927
 shader_parameter/AlphaSpeedGlobal = 1.0
@@ -1012,12 +1013,6 @@ scale_min = 0.3
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_gqmmt")
 
-[sub_resource type="BoxMesh" id="BoxMesh_muem4"]
-size = Vector3(0.055, 0.305, 3.42)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dp3eg"]
-size = Vector3(0.44, 0.415, 0.815)
-
 [sub_resource type="MultiMesh" id="MultiMesh_muem4"]
 transform_format = 1
 instance_count = 2000
@@ -1071,7 +1066,7 @@ far = 30.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.477274, -0.26614, 1.16639e-08, 0, -2.52215e-08, -0.579, 0.26614, 0.477274, -2.09124e-08, 1.80221, 0, 0)
+transform = Transform3D(-0.465126, -0.286077, 1.25246e-08, 0, -2.52215e-08, -0.579, 0.286077, -0.465126, 2.03685e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -1175,7 +1170,7 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 0.860318
+light_energy = 1.17158
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -1187,7 +1182,7 @@ mesh_instance = NodePath("FireflyMesh")
 speed = 0.872206
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Geometry/LampPost/Firefly"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0525975, -0.000977933, -0.295353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214463, -0.0872363, -0.209775)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../../../..")
 
@@ -1206,7 +1201,7 @@ mesh_instance = NodePath("FireflyMesh")
 speed = 1.09843
 
 [node name="FireflyMesh" type="MeshInstance3D" parent="Geometry/LampPost/Firefly2"]
-transform = Transform3D(1.00001, -5.96046e-08, -1.01328e-06, -2.08616e-07, 1, -2.27374e-13, 1.01328e-06, 0, 1.00001, -0.25737, -0.000977933, -0.154146)
+transform = Transform3D(1.00001, -5.96046e-08, -1.01328e-06, -2.08616e-07, 1, -2.27374e-13, 1.01328e-06, 0, 1.00001, 0.286203, -0.0872363, -0.0899311)
 mesh = SubResource("QuadMesh_ya4ey")
 skeleton = NodePath("../../../..")
 
@@ -1240,7 +1235,7 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost2/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 0.860318
+light_energy = 1.17158
 light_cull_mask = 1
 omni_range = 2.292
 omni_attenuation = 1.366
@@ -1259,7 +1254,6 @@ transform = Transform3D(-4.29083e-08, -8.34053e-09, 1, -0.190809, 0.981627, 0, -
 layers = 16
 amount = 200
 lifetime = 0.55
-fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
 
@@ -1268,7 +1262,6 @@ transform = Transform3D(0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 0, 0, 1, 
 layers = 16
 amount = 200
 amount_ratio = 0.55
-fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
 
@@ -1277,7 +1270,6 @@ transform = Transform3D(-0.981627, -0.190809, 8.74228e-08, -0.190809, 0.981627, 
 layers = 16
 amount = 200
 amount_ratio = 0.55
-fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
 
@@ -1286,7 +1278,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00108778, 1.28753, 0.00273
 layers = 16
 amount = 1000
 amount_ratio = 0.55
-fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_yc10j")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
 
@@ -1299,14 +1290,6 @@ omni_range = 0.745
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.806592, 0.497758, -0.580873)
 light_color = Color(0.601039, 0.543001, 0.477288, 1)
 omni_range = 0.745
-
-[node name="Fence" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.970942, 0, 0.239313, 0, 1, 0, -0.239313, 0, 0.970942, 0.390434, -0.8475, -1.18896)
-mesh = SubResource("BoxMesh_muem4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.937124, 0, 0.348997, 0, 1, 0, -0.348997, 0, 0.937124, 0.250285, -0.753824, 0.0154262)
-mesh = SubResource("BoxMesh_dp3eg")
 
 [node name="Grass" type="Node3D" parent="Geometry"]
 
@@ -1345,6 +1328,12 @@ mesh = SubResource("CapsuleMesh_tbgi4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_jyhfs")
+
+[node name="fence" parent="." instance=ExtResource("19_0ld40")]
+transform = Transform3D(0.0197466, 0, -0.018414, 0, 0.027, 0, 0.018414, 0, 0.0197466, 1.03947, -0.742483, 0.399892)
+
+[node name="fence2" parent="." instance=ExtResource("19_0ld40")]
+transform = Transform3D(0.027, 0, 0, 0, 0.027, 0, 0, 0, 0.027, 2.16064, -0.742483, 0.469078)
 
 [editable path="Geometry/LampPost"]
 [editable path="Geometry/LampPost2"]
