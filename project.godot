@@ -65,6 +65,13 @@ jump={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_2="Moon"
+3d_render/layer_3="Cloud"
+3d_render/layer_4="Cloud2"
+3d_render/layer_5="Fountain"
+
 [physics]
 
 3d/physics_engine="GodotPhysics3D"
