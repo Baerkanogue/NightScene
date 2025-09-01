@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://br3ons2r3sf8p"
-path="res://.godot/imported/fence.blend-f9794895a55759f7ef99d4691c387866.scn"
+uid="uid://f62g2smfwer1"
+path="res://.godot/imported/fence_perspective.blend-24b59f686b1b282fc04c52f8532f623c.scn"
 
 [deps]
 
-source_file="res://fence.blend"
-dest_files=["res://.godot/imported/fence.blend-f9794895a55759f7ef99d4691c387866.scn"]
+source_file="res://fence_perspective.blend"
+dest_files=["res://.godot/imported/fence_perspective.blend-24b59f686b1b282fc04c52f8532f623c.scn"]
 
 [params]
 
@@ -32,7 +32,16 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:SingleFence": {
+"import/skip_import": true
+},
+"PATH:SinglePillar": {
+"import/skip_import": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
