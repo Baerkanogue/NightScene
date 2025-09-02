@@ -33,13 +33,15 @@ func _ready() -> void:
 		for child in childs:
 			if child is MeshInstance3D:
 				mesh_instance = child
+	
 	if not mesh_instance:
 		Utils.kill_and_warn(self, "No mesh instance found.")
-	else:
-		mat = mesh_instance.mesh.surface_get_material(0)
-		are_shader_params_ready = true if shader_params_safe_loader() else false
-		
-		angle = randf()
+		return
+	
+	mat = mesh_instance.mesh.surface_get_material(0)
+	are_shader_params_ready = true if shader_params_safe_loader() else false
+	
+	angle = randf()
 
 
 func _process(delta: float) -> void:

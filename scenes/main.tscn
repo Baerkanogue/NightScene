@@ -487,7 +487,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ids8r"]
 resource_local_to_scene = true
 noise_type = 3
-seed = -1297815921
+seed = -4971231
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -885,7 +885,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1v6qk"]
 resource_local_to_scene = true
 noise_type = 3
-seed = -365876000
+seed = -1101562978
 frequency = 0.0017
 fractal_octaves = 8
 fractal_lacunarity = 2.01
@@ -1063,7 +1063,7 @@ far = 30.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.478707, 0.25624, -1.12197e-08, 0, -2.52215e-08, -0.579, -0.25624, 0.478707, -2.09669e-08, 1.80221, 0, 0)
+transform = Transform3D(0.478935, 0.255032, -1.11667e-08, 0, -2.52215e-08, -0.579, -0.255032, 0.478935, -2.09775e-08, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
@@ -1167,7 +1167,7 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.18942
+light_energy = 1.0059
 light_cull_mask = 1
 omni_range = 4.703
 omni_attenuation = 1.86
@@ -1232,7 +1232,7 @@ metadata/_edit_lock_ = true
 [node name="LampOmniLight3D" type="OmniLight3D" parent="Geometry/LampPost2/Circle" index="0"]
 transform = Transform3D(1, 0, 4.76837e-08, 0, 1, 0, -4.76837e-08, 0, 1, 0, 2.30124, 0)
 light_color = Color(1, 0.94, 0.64, 1)
-light_energy = 1.18942
+light_energy = 1.0059
 light_cull_mask = 1
 omni_range = 2.292
 omni_attenuation = 1.366

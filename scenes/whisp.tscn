@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://tlgb4hghn1i1"]
+[gd_scene load_steps=9 format=3 uid="uid://tlgb4hghn1i1"]
 
 [ext_resource type="Script" uid="uid://2o0jam4uui6g" path="res://scripts/player.gd" id="1_1oeoy"]
 [ext_resource type="Shader" uid="uid://c6qygjglnrp0e" path="res://shaders/whisp_shader.tres" id="1_xqbyk"]
+[ext_resource type="Script" uid="uid://c07vubelqkxrk" path="res://scripts/eyes.gd" id="3_sakoa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1oeoy"]
 render_priority = 0
 shader = ExtResource("1_xqbyk")
+shader_parameter/DirectionNormalized = Vector3(0, 0, 0)
+shader_parameter/DirectionScalar = 1.0
+shader_parameter/DirectionClampMax = 0.5
 shader_parameter/Color = Color(0, 0.866667, 0.866667, 1)
 shader_parameter/ColorIntensity = 2.0
 
@@ -29,6 +33,7 @@ radial_segments = 8
 rings = 4
 
 [node name="Whisp" type="CharacterBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_1oeoy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -39,7 +44,7 @@ shape = SubResource("SphereShape3D_1oeoy")
 debug_color = Color(1, 1, 1, 0.42)
 
 [node name="Eyes" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("3_sakoa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139182, 0, -0.0300918)

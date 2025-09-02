@@ -7,14 +7,33 @@ const JUMP_FORCE: float = 3.5
 
 var friction: float = 3.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var mat: ShaderMaterial
 
 @onready var z_position: float = self.global_position.z
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+
+
+func _ready() -> void:
+	if not mesh_instance_3d:
+		var childs: Array = Utils.find_all_childrens(self)
+		for child in childs:
+			if child is MeshInstance3D:
+				mesh_instance_3d = child
+	
+	if not mesh_instance_3d:
+		Utils.kill_and_warn(self, "No mesh instance")
+		return
+	
+	mat = mesh_instance_3d.mesh.surface_get_material(0)
 
 
 func _physics_process(delta: float) -> void:
 	movement_hander(delta)
 	self.global_position.z = z_position
 
+
+func _process(_delta: float) -> void:
+	feed_vec_to_shader()
 
 func movement_hander(delta: float) -> void:
 	# Ground detection for gravity and y velocity cancellation.
@@ -54,5 +73,12 @@ func get_movement_vector() -> Vector3:
 	dir = dir.normalized() * WALK_SPEED
 	return dir
 
+
 func is_jump_requested() -> bool:
 	return Input.is_action_pressed("jump") or Input.is_action_pressed("move_up")
+
+
+func feed_vec_to_shader() -> void:
+	var dir: Vector3 = self.get_real_velocity()
+	mat.set_shader_parameter("DirectionNormalized", dir.normalized())
+	mat.set_shader_parameter("DirectionScalar", dir.length())

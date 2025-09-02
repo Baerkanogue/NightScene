@@ -7,6 +7,7 @@ func kill_and_warn(target: Node, error_message: String) -> void:
 	message = message.format({"error": error_message, "node": target})
 	push_error(message)
 	target.set_process(false)
+	target.set_physics_process(false)
 
 func find_all_childrens(target: Node) -> Array:
 	var childrens: Array = []
