@@ -8,8 +8,12 @@ const JUMP_FORCE: float = 3.5
 var friction: float = 3.5
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var z_position: float = self.global_position.z
+
+
 func _physics_process(delta: float) -> void:
 	movement_hander(delta)
+	self.global_position.z = z_position
 
 
 func movement_hander(delta: float) -> void:
@@ -39,6 +43,7 @@ func movement_hander(delta: float) -> void:
 	if is_on_floor_state and is_jump_requested():
 		velocity.y += JUMP_FORCE
 	
+	self.velocity.z = 0
 	self.move_and_slide()
 
 
