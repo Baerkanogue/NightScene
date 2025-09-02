@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://tlgb4hghn1i1"]
+
+[ext_resource type="Script" uid="uid://2o0jam4uui6g" path="res://scripts/player.gd" id="1_1oeoy"]
+[ext_resource type="Shader" uid="uid://c6qygjglnrp0e" path="res://shaders/whisp_shader.tres" id="1_xqbyk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1oeoy"]
+render_priority = 0
+shader = ExtResource("1_xqbyk")
+shader_parameter/Color = Color(0, 0.866667, 0.866667, 1)
+shader_parameter/ColorIntensity = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sakoa"]
+material = SubResource("ShaderMaterial_1oeoy")
+radius = 0.125
+height = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1oeoy"]
+radius = 0.125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1oeoy"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1oeoy"]
+material = SubResource("StandardMaterial3D_1oeoy")
+radius = 0.019
+height = 0.087
+radial_segments = 8
+rings = 4
+
+[node name="Whisp" type="CharacterBody3D"]
+script = ExtResource("1_1oeoy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_sakoa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1oeoy")
+debug_color = Color(1, 1, 1, 0.42)
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139182, 0, -0.0300918)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_1oeoy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139, 0, 0.03)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_1oeoy")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+layers = 33
+light_color = Color(0, 0.866667, 0.866667, 1)
+light_size = 0.25
+light_cull_mask = 33
+omni_range = 1.0
+omni_attenuation = 0.7
