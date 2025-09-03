@@ -4,7 +4,7 @@ extends Node3D
 @export var max_angle: float = 20.0
 @export var lerp_speed: float = 5.0
 
-@onready var whisp: CharacterBody3D = self.get_parent()
+@onready var whisp: CharacterBody3D = self.get_parent().get_parent()
 
 
 func _process(delta: float) -> void:

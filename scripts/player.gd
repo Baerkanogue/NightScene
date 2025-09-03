@@ -1,25 +1,25 @@
 extends CharacterBody3D
 
 
+@export_subgroup("SineTransform", "sine_")
+@export var sine_frequency: float = 2.0
+@export var sine_amplitude: float = 0.02
+
 const WALK_SPEED: float = 1.35
 const WALK_ACCELERATION: float = 3.0
 const JUMP_FORCE: float = 3.5
 
 var friction: float = 3.5
+var phase: float = 0.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mat: ShaderMaterial
 
 @onready var z_position: float = self.global_position.z
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var mesh_instance_3d: MeshInstance3D = $WhispMeshInstance3D
+@onready var mesh_y_offset: float = mesh_instance_3d.position.y
 
 
 func _ready() -> void:
-	if not mesh_instance_3d:
-		var childs: Array = Utils.find_all_childrens(self)
-		for child in childs:
-			if child is MeshInstance3D:
-				mesh_instance_3d = child
-	
 	if not mesh_instance_3d:
 		Utils.kill_and_warn(self, "No mesh instance")
 		return
@@ -30,10 +30,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	movement_hander(delta)
 	self.global_position.z = z_position
-
-
-func _process(_delta: float) -> void:
+	
+	if self.is_on_floor():
+		sine_transform(delta)
+		
 	feed_vec_to_shader()
+
 
 func movement_hander(delta: float) -> void:
 	# Ground detection for gravity and y velocity cancellation.
@@ -82,3 +84,9 @@ func feed_vec_to_shader() -> void:
 	var dir: Vector3 = self.get_real_velocity()
 	mat.set_shader_parameter("DirectionNormalized", dir.normalized())
 	mat.set_shader_parameter("DirectionScalar", dir.length())
+
+
+func sine_transform(delta: float) -> void:
+	phase += sine_frequency * delta
+	phase = fmod(phase, TAU)
+	mesh_instance_3d.position.y = sin(phase) * sine_amplitude + mesh_y_offset

@@ -18,9 +18,6 @@ material = SubResource("ShaderMaterial_1oeoy")
 radius = 0.125
 height = 0.25
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1oeoy"]
-radius = 0.125
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1oeoy"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
@@ -32,34 +29,38 @@ height = 0.087
 radial_segments = 8
 rings = 4
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1oeoy"]
+radius = 0.125
+
 [node name="Whisp" type="CharacterBody3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_1oeoy")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="WhispMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0571899, 0)
 mesh = SubResource("SphereMesh_sakoa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_1oeoy")
-debug_color = Color(1, 1, 1, 0.42)
-
-[node name="Eyes" type="Node3D" parent="."]
+[node name="Eyes" type="Node3D" parent="WhispMeshInstance3D"]
 script = ExtResource("3_sakoa")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Eyes"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WhispMeshInstance3D/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139182, 0, -0.0300918)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_1oeoy")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Eyes"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WhispMeshInstance3D/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139, 0, 0.03)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_1oeoy")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="WhispMeshInstance3D"]
 layers = 33
 light_color = Color(0, 0.866667, 0.866667, 1)
 light_size = 0.25
 light_cull_mask = 33
 omni_range = 1.0
 omni_attenuation = 0.7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1oeoy")
+debug_color = Color(1, 1, 1, 0.42)
