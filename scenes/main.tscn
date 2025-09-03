@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://dd6tfjvemfxu"]
+[gd_scene load_steps=138 format=4 uid="uid://dd6tfjvemfxu"]
 
 [ext_resource type="Script" uid="uid://5bq4ewqqi03c" path="res://scripts/test_torus.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://ct6q0gda2r4ft" path="res://scripts/environment.gd" id="3_sugp2"]
@@ -973,8 +973,15 @@ normal_enabled = true
 normal_scale = 0.25
 normal_texture = ExtResource("15_muem4")
 
+[sub_resource type="Gradient" id="Gradient_0ld40"]
+offsets = PackedFloat32Array(0.292887, 0.58159, 0.794979)
+colors = PackedColorArray(0.601223, 0.601223, 0.601223, 1, 1, 1, 1, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqmmt"]
+gradient = SubResource("Gradient_0ld40")
+
 [sub_resource type="Curve" id="Curve_muem4"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.879245, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55284, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.739623, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55284, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_dp3eg"]
@@ -988,11 +995,15 @@ initial_velocity_max = 6.6
 scale_min = 0.3
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_dp3eg")
+color_ramp = SubResource("GradientTexture1D_gqmmt")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
-albedo_color = Color(0.7584, 0.81552, 0.96, 1)
-metallic_specular = 1.0
-roughness = 0.0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.466181, 0.466181, 0.466181, 1)
+texture_filter = 0
+disable_receive_shadows = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_dp3eg"]
 material = SubResource("StandardMaterial3D_muem4")
@@ -1000,6 +1011,13 @@ radius = 0.013
 height = 0.025
 radial_segments = 4
 rings = 2
+
+[sub_resource type="Gradient" id="Gradient_gqmmt"]
+offsets = PackedFloat32Array(0.0502092, 0.309623, 0.65272)
+colors = PackedColorArray(0.481789, 0.481789, 0.481789, 1, 1, 1, 1, 1, 0.482353, 0.482353, 0.482353, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yc10j"]
+gradient = SubResource("Gradient_gqmmt")
 
 [sub_resource type="Curve" id="Curve_0ld40"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.879245, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.55284, 0.0, 0, 0]
@@ -1017,6 +1035,7 @@ initial_velocity_max = 3.0
 scale_min = 0.3
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_gqmmt")
+color_ramp = SubResource("GradientTexture1D_yc10j")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_muem4"]
 size = Vector2(2.3, 0.1)
@@ -1249,6 +1268,8 @@ metadata/_edit_lock_ = true
 [node name="FountainGPU" type="GPUParticles3D" parent="Geometry/Fountain/Details1_002" index="0"]
 transform = Transform3D(-4.29083e-08, -8.34053e-09, 1, -0.190809, 0.981627, 0, -0.981627, -0.190809, -4.37114e-08, 0.00164771, 0, 0.816204)
 layers = 16
+cast_shadow = 0
+gi_mode = 0
 amount = 200
 lifetime = 0.55
 process_material = SubResource("ParticleProcessMaterial_muem4")
@@ -1257,8 +1278,9 @@ draw_pass_1 = SubResource("SphereMesh_dp3eg")
 [node name="LeftFountainGPU" type="GPUParticles3D" parent="Geometry/Fountain/Details1_002" index="1"]
 transform = Transform3D(0.981627, 0.190809, 0, -0.190809, 0.981627, 0, 0, 0, 1, -0.820535, 0, -0.0320001)
 layers = 16
-amount = 200
-amount_ratio = 0.55
+cast_shadow = 0
+gi_mode = 0
+amount = 100
 lifetime = 0.55
 process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
@@ -1266,8 +1288,9 @@ draw_pass_1 = SubResource("SphereMesh_dp3eg")
 [node name="RightFountainGPU" type="GPUParticles3D" parent="Geometry/Fountain/Details1_002" index="2"]
 transform = Transform3D(-0.981627, -0.190809, 8.74228e-08, -0.190809, 0.981627, 0, -8.58166e-08, -1.6681e-08, -1, 0.792294, 0, -0.0320001)
 layers = 16
-amount = 200
-amount_ratio = 0.55
+cast_shadow = 0
+gi_mode = 0
+amount = 100
 lifetime = 0.55
 process_material = SubResource("ParticleProcessMaterial_muem4")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")
@@ -1275,8 +1298,9 @@ draw_pass_1 = SubResource("SphereMesh_dp3eg")
 [node name="TopFountainGPU" type="GPUParticles3D" parent="Geometry/Fountain/Details1_002" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00108778, 1.28753, 0.00273991)
 layers = 16
-amount = 1000
-amount_ratio = 0.55
+cast_shadow = 0
+gi_mode = 0
+amount = 200
 lifetime = 0.45
 process_material = SubResource("ParticleProcessMaterial_yc10j")
 draw_pass_1 = SubResource("SphereMesh_dp3eg")

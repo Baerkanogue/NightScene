@@ -1,8 +1,6 @@
-[gd_resource type="VisualShader" load_steps=50 format=3 uid="uid://d1lykn6h2myh"]
+[gd_resource type="VisualShader" load_steps=42 format=3 uid="uid://d1lykn6h2myh"]
 
-[ext_resource type="Texture2D" uid="uid://b8xebeukbrkak" path="res://assets/stars_instance.png" id="1_4cbug"]
 [ext_resource type="Gradient" uid="uid://yq1i5b6sueqv" path="res://shaders/stars_gradient.tres" id="1_o4i5q"]
-[ext_resource type="Texture2D" uid="uid://qk02ypa3f7cg" path="res://assets/stars_mask.png" id="2_o4i5q"]
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_5lq73"]
 function = 1
@@ -17,24 +15,10 @@ texture_type = 1
 texture_filter = 1
 texture_repeat = 1
 
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_tbggt"]
-linked_parent_graph_frame = 8
-parameter_name = "Mask"
-texture_type = 1
-texture_filter = 1
-texture_repeat = 1
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_akwc0"]
 linked_parent_graph_frame = 3
 source = 5
 texture_type = 1
-
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4cbug"]
-linked_parent_graph_frame = 6
-parameter_name = "Instance"
-texture_type = 1
-texture_filter = 1
-texture_repeat = 1
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_4cbug"]
 default_input_values = [1, Vector2(1, 1), 2, Vector2(1, 1)]
@@ -49,7 +33,7 @@ input_name = "time"
 operator = 4
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_tbggt"]
-size = Vector2(784, 482)
+size = Vector2(784, 892)
 title = "Albedo"
 attached_nodes = PackedInt32Array(2, 12, 32, 34)
 
@@ -101,7 +85,7 @@ linked_parent_graph_frame = 39
 constant = 8.0
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_o345y"]
-size = Vector2(1244, 402)
+size = Vector2(1244, 660)
 title = "Emission"
 attached_nodes = PackedInt32Array(37, 36, 38, 35, 41, 52)
 
@@ -173,12 +157,6 @@ texture_type = 1
 output_port_for_preview = 0
 operator = 1
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_iluh0"]
-linked_parent_graph_frame = 6
-source = 5
-texture = ExtResource("1_4cbug")
-texture_type = 1
-
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_8tvxs"]
 parameter_name = "HorizonMaskHeight"
 hint = 1
@@ -193,22 +171,6 @@ operator = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_o4i5q"]
 input_name = "uv"
-
-[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_rj27e"]
-size = Vector2(564, 242)
-title = "Instance"
-attached_nodes = PackedInt32Array(5, 20)
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_hoqlq"]
-linked_parent_graph_frame = 8
-source = 5
-texture = ExtResource("2_o4i5q")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_ktjmb"]
-size = Vector2(564, 242)
-title = "Mask"
-attached_nodes = PackedInt32Array(7, 13)
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_r6wtj"]
 input_name = "uv"
@@ -373,14 +335,6 @@ nodes/fragment/3/node = SubResource("VisualShaderNodeFrame_tbggt")
 nodes/fragment/3/position = Vector2(-660, 340)
 nodes/fragment/4/node = SubResource("VisualShaderNodeFloatConstant_ufcaf")
 nodes/fragment/4/position = Vector2(2200, 180)
-nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_iluh0")
-nodes/fragment/5/position = Vector2(-1460, -180)
-nodes/fragment/6/node = SubResource("VisualShaderNodeFrame_rj27e")
-nodes/fragment/6/position = Vector2(-1820, -340)
-nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_hoqlq")
-nodes/fragment/7/position = Vector2(-200, 20)
-nodes/fragment/8/node = SubResource("VisualShaderNodeFrame_ktjmb")
-nodes/fragment/8/position = Vector2(-560, -141)
 nodes/fragment/9/node = SubResource("VisualShaderNodeInput_r6wtj")
 nodes/fragment/9/position = Vector2(-1680, 340)
 nodes/fragment/10/node = SubResource("VisualShaderNodeUVFunc_5lq73")
@@ -389,10 +343,6 @@ nodes/fragment/11/node = SubResource("VisualShaderNodeFloatConstant_gdum4")
 nodes/fragment/11/position = Vector2(-1600, 480)
 nodes/fragment/12/node = SubResource("VisualShaderNodeTexture2DParameter_4wm5j")
 nodes/fragment/12/position = Vector2(-620, 380)
-nodes/fragment/13/node = SubResource("VisualShaderNodeTexture2DParameter_tbggt")
-nodes/fragment/13/position = Vector2(-520, -100)
-nodes/fragment/20/node = SubResource("VisualShaderNodeTexture2DParameter_4cbug")
-nodes/fragment/20/position = Vector2(-1780, -300)
 nodes/fragment/26/node = SubResource("VisualShaderNodeUVFunc_4cbug")
 nodes/fragment/26/position = Vector2(-620, 1480)
 nodes/fragment/27/node = SubResource("VisualShaderNodeFloatConstant_o4i5q")
@@ -445,4 +395,4 @@ nodes/fragment/52/node = SubResource("VisualShaderNodeVectorOp_o4i5q")
 nodes/fragment/52/position = Vector2(1400, 1120)
 nodes/fragment/53/node = SubResource("VisualShaderNodeInput_o4i5q")
 nodes/fragment/53/position = Vector2(-1020, 2300)
-nodes/fragment/connections = PackedInt32Array(9, 0, 10, 0, 10, 0, 2, 0, 12, 0, 2, 2, 11, 0, 10, 1, 13, 0, 7, 2, 10, 0, 7, 0, 4, 0, 0, 4, 4, 0, 0, 3, 4, 0, 0, 2, 20, 0, 5, 2, 10, 0, 5, 0, 28, 0, 30, 1, 27, 0, 29, 1, 29, 0, 26, 2, 30, 0, 29, 0, 32, 0, 34, 1, 2, 0, 34, 0, 36, 0, 35, 1, 34, 0, 37, 0, 37, 0, 35, 0, 38, 0, 37, 1, 26, 0, 40, 0, 35, 0, 41, 0, 40, 0, 42, 0, 42, 0, 41, 1, 43, 0, 45, 0, 45, 0, 42, 1, 44, 0, 45, 1, 47, 0, 46, 1, 31, 0, 46, 0, 46, 0, 30, 0, 48, 0, 49, 0, 50, 0, 49, 1, 41, 0, 52, 0, 49, 0, 52, 1, 53, 0, 48, 0, 52, 0, 0, 0, 52, 0, 0, 5, 41, 0, 0, 22, 52, 1, 0, 1)
+nodes/fragment/connections = PackedInt32Array(9, 0, 10, 0, 10, 0, 2, 0, 12, 0, 2, 2, 11, 0, 10, 1, 4, 0, 0, 4, 4, 0, 0, 3, 4, 0, 0, 2, 28, 0, 30, 1, 27, 0, 29, 1, 29, 0, 26, 2, 30, 0, 29, 0, 32, 0, 34, 1, 2, 0, 34, 0, 36, 0, 35, 1, 34, 0, 37, 0, 37, 0, 35, 0, 38, 0, 37, 1, 26, 0, 40, 0, 35, 0, 41, 0, 40, 0, 42, 0, 42, 0, 41, 1, 43, 0, 45, 0, 45, 0, 42, 1, 44, 0, 45, 1, 47, 0, 46, 1, 31, 0, 46, 0, 46, 0, 30, 0, 48, 0, 49, 0, 50, 0, 49, 1, 41, 0, 52, 0, 49, 0, 52, 1, 53, 0, 48, 0, 52, 0, 0, 0, 52, 0, 0, 5, 41, 0, 0, 22, 52, 1, 0, 1)
