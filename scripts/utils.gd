@@ -1,9 +1,9 @@
-@tool
+#@tool
 extends Node
 
 ## Push error to console and stop target node process.
 func kill_and_warn(target: Node, error_message: String) -> void:
-	var message: String = "\n{error}\nFlushing: \"{node}\"."
+	var message: String = "\n{error}\nKilling: \"{node}\"."
 	message = message.format({"error": error_message, "node": target})
 	push_error(message)
 	target.set_process(false)

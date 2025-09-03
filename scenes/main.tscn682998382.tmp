@@ -1063,7 +1063,7 @@ far = 30.0
 script = ExtResource("4_tbgi4")
 
 [node name="TestTorus" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(0.331178, -0.428966, 1.87815e-08, 0, -2.52215e-08, -0.579, 0.428966, 0.331178, -1.44961e-08, 1.80221, 0, 0)
+transform = Transform3D(-0.194578, 0.506125, -2.21624e-08, 0, -2.52215e-08, -0.579, -0.506125, -0.194578, 8.51683e-09, 1.80221, 0, 0)
 mesh = SubResource("TorusMesh_7dm0k")
 skeleton = NodePath("../..")
 script = ExtResource("2_0wfyh")
