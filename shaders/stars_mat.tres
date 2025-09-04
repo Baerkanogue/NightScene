@@ -10,4 +10,4 @@ shader_parameter/Albedo = ExtResource("2_rl6pj")
 shader_parameter/EmissionMultiplier = 1.35
 shader_parameter/ShineMaskSpeedMultiplier = 0.35
 shader_parameter/ShineMaskMultiplier = 2.296
-shader_parameter/HorizonMaskHeight = 0.372
+shader_parameter/HorizonMaskHeight = -0.052

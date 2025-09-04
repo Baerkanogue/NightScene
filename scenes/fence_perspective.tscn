@@ -213,20 +213,24 @@ shadow_mesh = SubResource("ArrayMesh_fo3qt")
 
 [node name="FarFence" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.646237, 0.93616, -0.000208924)
+gi_mode = 2
 mesh = SubResource("ArrayMesh_vjmvh")
 skeleton = NodePath("")
 
 [node name="CloseFence" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.22892, 1.01897, -0.000297267)
+gi_mode = 2
 mesh = SubResource("ArrayMesh_18am0")
 skeleton = NodePath("")
 
 [node name="CornerPillar" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0855, 0.621168, 0.00185453)
+gi_mode = 2
 mesh = SubResource("ArrayMesh_fvoa0")
 skeleton = NodePath("")
 
 [node name="FrontFence" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.07582, 1.07176, 9.01929)
+gi_mode = 2
 mesh = SubResource("ArrayMesh_lilc3")
 skeleton = NodePath("")

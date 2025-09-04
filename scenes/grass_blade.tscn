@@ -46,5 +46,6 @@ shadow_mesh = SubResource("ArrayMesh_tq7xb")
 [node name="grass_blade" type="Node3D"]
 
 [node name="GrassMesh" type="MeshInstance3D" parent="."]
+gi_mode = 2
 mesh = SubResource("ArrayMesh_jners")
 skeleton = NodePath("")

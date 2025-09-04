@@ -48,6 +48,7 @@ whisp = NodePath("..")
 mesh = NodePath("WhispMeshInstance3D")
 
 [node name="WhispMeshInstance3D" type="MeshInstance3D" parent="HoverArm"]
+gi_mode = 2
 mesh = SubResource("SphereMesh_sakoa")
 skeleton = NodePath("../..")
 
