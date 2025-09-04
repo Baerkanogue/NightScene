@@ -1,7 +1,6 @@
 #@tool
 extends Node3D
 
-
 @export var mesh_instance: MeshInstance3D
 @export_group("Movement")
 @export_subgroup("BaseMovement")
@@ -33,6 +32,7 @@ func _ready() -> void:
 		for child in childs:
 			if child is MeshInstance3D:
 				mesh_instance = child
+				break
 	
 	if not mesh_instance:
 		Utils.kill_and_warn(self, "No mesh instance found.")

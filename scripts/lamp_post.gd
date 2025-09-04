@@ -1,7 +1,6 @@
 #@tool
 extends Node3D
 
-
 @export_group("Light Flicker")
 @export var light: OmniLight3D
 @export var amplitude: float = 1.0
@@ -17,6 +16,7 @@ func _ready() -> void:
 		for child in childs:
 			if child is OmniLight3D:
 				light = child
+				break
 	
 	if not light:
 		Utils.kill_and_warn(self,"No Omnilight found.")

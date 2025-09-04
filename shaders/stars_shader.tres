@@ -33,7 +33,7 @@ input_name = "time"
 operator = 4
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_tbggt"]
-size = Vector2(816, 892)
+size = Vector2(784, 482)
 title = "Albedo"
 attached_nodes = PackedInt32Array(2, 12, 32, 34)
 
@@ -85,7 +85,7 @@ linked_parent_graph_frame = 39
 constant = 8.0
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_o345y"]
-size = Vector2(1276, 660)
+size = Vector2(1244, 402)
 title = "Emission"
 attached_nodes = PackedInt32Array(37, 36, 38, 35, 41, 52)
 
@@ -327,7 +327,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-435.443, -184.975)
 modes/blend = 1
 nodes/fragment/0/position = Vector2(1960, 60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_akwc0")

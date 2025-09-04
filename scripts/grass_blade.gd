@@ -1,7 +1,6 @@
 #@tool
 extends MeshInstance3D
 
-
 var player: CharacterBody3D
 @onready var mat: ShaderMaterial = self.mesh.surface_get_material(0)
 
