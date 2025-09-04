@@ -1,11 +1,6 @@
 extends CharacterBody3D
 
-
-@export_subgroup("SineTransform", "sine_")
-@export var sine_frequency: float = 2.0
-@export var sine_amplitude: float = 0.02
-
-@export var min_hover_height: float = 20.0
+@export var mesh_instance_3d: MeshInstance3D
 
 const WALK_SPEED: float = 1.35
 const WALK_ACCELERATION: float = 3.0
@@ -17,13 +12,17 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mat: ShaderMaterial
 
 @onready var z_position: float = self.global_position.z
-@onready var mesh_instance_3d: MeshInstance3D = $WhispMeshInstance3D
-@onready var mesh_y_offset: float = mesh_instance_3d.position.y
 
 
 func _ready() -> void:
 	if not mesh_instance_3d:
-		Utils.kill_and_warn(self, "No mesh instance")
+		var childs: Array = Utils.find_all_childrens(self)
+		for child in childs:
+			if child.name == "WhispMeshInstance3D":
+				mesh_instance_3d = child
+				break
+	if not mesh_instance_3d:
+		Utils.kill_and_warn(self, "Whip mesh not found.")
 		return
 	
 	mat = mesh_instance_3d.mesh.surface_get_material(0)
@@ -37,7 +36,6 @@ func _physics_process(delta: float) -> void:
 		#sine_transform(delta)
 		
 	feed_vec_to_shader()
-	spring_hover()
 
 
 func movement_hander(delta: float) -> void:
@@ -87,18 +85,3 @@ func feed_vec_to_shader() -> void:
 	var dir: Vector3 = self.get_real_velocity()
 	mat.set_shader_parameter("DirectionNormalized", dir.normalized())
 	mat.set_shader_parameter("DirectionScalar", dir.length())
-
-
-func sine_transform(delta: float) -> void:
-	phase += sine_frequency * delta
-	phase = fmod(phase, TAU)
-	mesh_instance_3d.position.y = sin(phase) * sine_amplitude + mesh_y_offset
-
-
-func spring_hover():
-	var pos_y: float =  mesh_instance_3d.global_position.y 
-	#print(pos_y)
-	if pos_y < min_hover_height:
-		mesh_instance_3d.global_position.y = lerpf(pos_y, min_hover_height - 0.01, .05)
-	else:
-		mesh_instance_3d.global_position.y = lerpf(pos_y, self.global_position.y, .5)
