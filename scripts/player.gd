@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var sine_frequency: float = 2.0
 @export var sine_amplitude: float = 0.02
 
+@export var min_hover_height: float = 20.0
+
 const WALK_SPEED: float = 1.35
 const WALK_ACCELERATION: float = 3.0
 const JUMP_FORCE: float = 3.5
@@ -31,10 +33,11 @@ func _physics_process(delta: float) -> void:
 	movement_hander(delta)
 	self.global_position.z = z_position
 	
-	if self.is_on_floor():
-		sine_transform(delta)
+	#if self.is_on_floor():
+		#sine_transform(delta)
 		
 	feed_vec_to_shader()
+	spring_hover()
 
 
 func movement_hander(delta: float) -> void:
@@ -90,3 +93,12 @@ func sine_transform(delta: float) -> void:
 	phase += sine_frequency * delta
 	phase = fmod(phase, TAU)
 	mesh_instance_3d.position.y = sin(phase) * sine_amplitude + mesh_y_offset
+
+
+func spring_hover():
+	var pos_y: float =  mesh_instance_3d.global_position.y 
+	#print(pos_y)
+	if pos_y < min_hover_height:
+		mesh_instance_3d.global_position.y = lerpf(pos_y, min_hover_height - 0.01, .05)
+	else:
+		mesh_instance_3d.global_position.y = lerpf(pos_y, self.global_position.y, .5)

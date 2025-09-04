@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://cs1el2dl7xiww"]
+[gd_resource type="VisualShader" load_steps=37 format=3 uid="uid://cs1el2dl7xiww"]
 
 [ext_resource type="Texture2D" uid="uid://d7xhcd5pgewu" path="res://shaders/cloud_alpha_noise.tres" id="1_s4wkv"]
 [ext_resource type="Texture2D" uid="uid://b3xo6ejriwwpj" path="res://shaders/could_vertex_noise.tres" id="2_kyay3"]
@@ -45,6 +45,9 @@ operator = 2
 parameter_name = "AlphaSpeedGlobal"
 default_value_enabled = true
 default_value = 1.0
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_kyay3"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.999]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_jnqfb"]
 default_input_values = [2, true, 3, 0.1]
@@ -284,13 +287,20 @@ void fragment() {
 	float n_out23p0 = n_out14p0 * n_out24p0;
 
 
+// Clamp:27
+	float n_in27p1 = 0.00000;
+	float n_in27p2 = 0.99900;
+	float n_out27p0 = clamp(n_out23p0, n_in27p1, n_in27p2);
+
+
 // Output:0
 	ALBEDO = vec3(n_out2p0.xyz);
-	ALPHA = n_out23p0;
+	ALPHA = n_out27p0;
 
 
 }
 "
+graph_offset = Vector2(-885.364, -172.507)
 modes/depth_draw = 1
 flags/shadows_disabled = true
 flags/ambient_light_disabled = true
@@ -333,7 +343,7 @@ nodes/fragment/0/position = Vector2(960, 120)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_hyg1r")
 nodes/fragment/2/position = Vector2(355, 200)
 nodes/fragment/3/node = SubResource("VisualShaderNodeFresnel_jnqfb")
-nodes/fragment/3/position = Vector2(-60, 300)
+nodes/fragment/3/position = Vector2(-280, 320)
 nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_l0mml")
 nodes/fragment/5/position = Vector2(-520, 380)
 nodes/fragment/6/node = SubResource("VisualShaderNodeInput_j2xdl")
@@ -345,9 +355,9 @@ nodes/fragment/8/position = Vector2(-920, 440)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatConstant_jnqfb")
 nodes/fragment/10/position = Vector2(-1920, 500)
 nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_kyihp")
-nodes/fragment/11/position = Vector2(280, 300)
+nodes/fragment/11/position = Vector2(60, 320)
 nodes/fragment/14/node = SubResource("VisualShaderNodeFloatOp_4a03p")
-nodes/fragment/14/position = Vector2(480, 320)
+nodes/fragment/14/position = Vector2(260, 340)
 nodes/fragment/15/node = SubResource("VisualShaderNodeFloatOp_jnqfb")
 nodes/fragment/15/position = Vector2(-1520, 640)
 nodes/fragment/20/node = SubResource("VisualShaderNodeVec2Parameter_jnqfb")
@@ -355,13 +365,15 @@ nodes/fragment/20/position = Vector2(-1540, 880)
 nodes/fragment/21/node = SubResource("VisualShaderNodeVectorOp_psqiv")
 nodes/fragment/21/position = Vector2(-1220, 680)
 nodes/fragment/22/node = SubResource("VisualShaderNodeFloatParameter_kyihp")
-nodes/fragment/22/position = Vector2(80, 540)
+nodes/fragment/22/position = Vector2(-140, 560)
 nodes/fragment/23/node = SubResource("VisualShaderNodeFloatOp_psqiv")
-nodes/fragment/23/position = Vector2(720, 280)
+nodes/fragment/23/position = Vector2(500, 300)
 nodes/fragment/24/node = SubResource("VisualShaderNodeFloatParameter_hap7l")
-nodes/fragment/24/position = Vector2(400, 560)
+nodes/fragment/24/position = Vector2(180, 580)
 nodes/fragment/25/node = SubResource("VisualShaderNodeFloatOp_wxj22")
 nodes/fragment/25/position = Vector2(-1720, 500)
 nodes/fragment/26/node = SubResource("VisualShaderNodeFloatParameter_l0mml")
 nodes/fragment/26/position = Vector2(-2160, 540)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0, 3, 0, 11, 0, 11, 0, 14, 0, 7, 0, 15, 1, 20, 0, 21, 1, 15, 0, 21, 0, 21, 0, 8, 2, 5, 0, 11, 1, 22, 0, 14, 1, 14, 0, 23, 0, 23, 0, 0, 1, 24, 0, 23, 1, 10, 0, 25, 0, 25, 0, 15, 0, 26, 0, 25, 1)
+nodes/fragment/27/node = SubResource("VisualShaderNodeClamp_kyay3")
+nodes/fragment/27/position = Vector2(700, 320)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 6, 0, 8, 0, 8, 0, 5, 0, 3, 0, 11, 0, 11, 0, 14, 0, 7, 0, 15, 1, 20, 0, 21, 1, 15, 0, 21, 0, 21, 0, 8, 2, 5, 0, 11, 1, 22, 0, 14, 1, 14, 0, 23, 0, 24, 0, 23, 1, 10, 0, 25, 0, 25, 0, 15, 0, 26, 0, 25, 1, 23, 0, 27, 0, 27, 0, 0, 1)
