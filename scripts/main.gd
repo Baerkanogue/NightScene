@@ -7,11 +7,12 @@ extends Node3D
 ## 2: Force high
 @export_range(0.0, 2.0, 1.0) var force_mode: int = 0
 @export var print_infos: bool = false
-
-var clock: Timer = Timer.new()
+@export var light_strartup_delay: float = 2.0
 
 func _ready() -> void:
 	check_nulls()
+	light_startup()
+	
 	var is_low_spec: bool = not is_system_capable()
 	
 	match force_mode:
@@ -28,26 +29,20 @@ func _ready() -> void:
 			is_low_spec = false
 		
 	if is_low_spec:
-		var env: Environment = world_environment.environment
-		env.sdfgi_enabled = false
-		env.glow_enabled = false
-		env.ssao_enabled = false
-		
-		Engine.max_fps = 60
-		Engine.physics_ticks_per_second = 30
-		Engine.set_physics_jitter_fix(2.0)
+		set_settings_low()
 	
 	if OS.is_debug_build():
 		print_rich("[color=web_gray]-verbose: Print infos\n-force_mode_1 = Force low fidelity\n-force_mode_2 = Force high fidelity\n[/color]")
 		
 	if print_infos:
 		print_rich("[color=green]" + get_specs() + "[/color]")
-		self.add_child(clock)
-		clock.start(5)
-		await clock.timeout
+		var fps_clock: Timer = Timer.new()
+		self.add_child(fps_clock)
+		fps_clock.start(5)
+		await fps_clock.timeout
+		if is_instance_valid(fps_clock):
+			fps_clock.queue_free()
 		print_rich("[color=green]" + str(Engine.get_frames_per_second()) + " fps[/color]")
-	
-	$AnimationPlayer.play_backwards("light")
 
 
 func is_system_capable() -> bool:
@@ -90,3 +85,57 @@ func check_nulls() -> void:
 			return
 	
 	Utils.kill_and_warn(self, "World Environment or Reflection Proble not found.")
+
+
+func light_startup() -> void:
+	var anim_player: AnimationPlayer = $AnimationPlayer
+	var lamp_post_lamps: Array[OmniLight3D] = [
+		$Geometry/LampPost/Circle/LampOmniLight3D,
+		$Geometry/LampPost2/Circle/LampOmniLight3D,
+	]
+	var lights: Array[Light3D] = [
+	$Environment/EnvSpotLight3D,
+	$Geometry/Fountain/OmniLight3D,
+	$Geometry/Fountain/OmniLight3D2,
+	lamp_post_lamps[0],
+	lamp_post_lamps[1],
+]
+	
+	var verif_count: int = 5
+	if lights.size() != verif_count or not anim_player:
+		push_error("Error in light startup routine. Lights or animation player not found.")
+		return
+	
+	for light in lights:
+		light.light_energy = 0.0
+	
+	var light_clock: Timer = Timer.new()
+	self.add_child(light_clock)
+	light_clock.start(10)
+	await light_clock.timeout
+	if is_instance_valid(light_clock):
+		light_clock.queue_free()
+	anim_player.play_backwards("light")
+	await anim_player.animation_finished
+	if is_instance_valid(anim_player):
+		anim_player.queue_free()
+	for light in lamp_post_lamps:
+		light.get_parent().get_parent().is_flickering = true
+
+
+func set_settings_low() -> void:
+	var env: Environment = world_environment.environment
+	env.sdfgi_enabled = false
+	env.glow_enabled = false
+	env.ssao_enabled = false
+	
+	Engine.max_fps = 60
+	Engine.physics_ticks_per_second = 30
+	Engine.set_physics_jitter_fix(2.0)
+	
+	var viewp: Viewport = get_viewport()
+	viewp.msaa_3d = Viewport.MSAA_DISABLED
+	viewp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+	viewp.use_taa = false
+	viewp.use_debanding = false
+	viewp.anisotropic_filtering_level = Viewport.ANISOTROPY_DISABLED
