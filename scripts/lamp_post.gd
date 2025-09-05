@@ -8,6 +8,7 @@ extends Node3D
 @export var v_offset: float = 1.0
 
 var phase: float = 0.0
+var is_flickering: bool = false
 
 
 func _ready() -> void:
@@ -23,7 +24,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	light_flicker(delta)
+	if is_flickering:
+		light_flicker(delta)
 
 func light_flicker(delta: float) -> void:
 	phase += frequency * delta
