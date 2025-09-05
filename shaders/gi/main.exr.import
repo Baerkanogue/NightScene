@@ -2,8 +2,8 @@
 
 importer="2d_array_texture"
 type="CompressedTexture2DArray"
-uid="uid://ch2716l1yygik"
-path.bptc="res://.godot/imported/main.exr-2f67eb4238b400acd003bc62d02d0e98.bptc.ctexarray"
+uid="uid://xf7jehoi8rpu"
+path.bptc="res://.godot/imported/main.exr-d1533a5bfdd6b2b9f739a7ae38523ce8.bptc.ctexarray"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/main.exr"
-dest_files=["res://.godot/imported/main.exr-2f67eb4238b400acd003bc62d02d0e98.bptc.ctexarray"]
+source_file="res://shaders/gi/main.exr"
+dest_files=["res://.godot/imported/main.exr-d1533a5bfdd6b2b9f739a7ae38523ce8.bptc.ctexarray"]
 
 [params]
 

@@ -73,6 +73,7 @@ jump={
 3d_render/layer_4="Cloud2"
 3d_render/layer_5="Fountain"
 3d_render/layer_6="Grass"
+3d_render/layer_7="Lamp post"
 
 [physics]
 
