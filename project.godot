@@ -23,6 +23,8 @@ Utils="*res://scripts/utils.gd"
 
 [display]
 
+window/size/always_on_top=true
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [file_customization]
@@ -81,6 +83,7 @@ jump={
 
 [rendering]
 
+shader_compiler/shader_cache/enabled=false
 textures/default_filters/anisotropic_filtering_level=4
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1
