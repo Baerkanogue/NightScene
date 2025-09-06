@@ -7,11 +7,16 @@ extends Node3D
 ## 2: Force high
 @export_range(0.0, 2.0, 1.0) var force_mode: int = 0
 @export var print_infos: bool = false
-@export var light_strartup_delay: float = 2.0
+@export var light_strartup_delay: float = 1.0
+@export var show_intro: bool = true
+@export_range(0.0, 1.0, 0.01) var intro_speed_scale: float = 0.2
+
+@onready var shader_text: RichTextLabel = $MainControl/ShaderText
+@onready var background: ColorRect = $MainControl/Background
+
 
 func _ready() -> void:
 	check_nulls()
-	light_startup()
 	
 	var is_low_spec: bool = not is_system_capable()
 	
@@ -43,6 +48,20 @@ func _ready() -> void:
 		if is_instance_valid(fps_clock):
 			fps_clock.queue_free()
 		print_rich("[color=green]" + str(Engine.get_frames_per_second()) + " fps[/color]")
+	
+	if not show_intro:
+		return
+	background.show()
+	shader_text.show()
+	var intro_clock: Timer = Timer.new()
+	self.add_child(intro_clock)
+	intro_clock.start(1.0)
+	await intro_clock.timeout
+	shader_text.hide()
+	background.hide()
+	if is_instance_valid(intro_clock):
+		intro_clock.queue_free()
+	light_startup()
 
 
 func is_system_capable() -> bool:
@@ -111,10 +130,11 @@ func light_startup() -> void:
 	
 	var light_clock: Timer = Timer.new()
 	self.add_child(light_clock)
-	light_clock.start(10)
+	light_clock.start(light_strartup_delay)
 	await light_clock.timeout
 	if is_instance_valid(light_clock):
 		light_clock.queue_free()
+	anim_player.set_speed_scale(intro_speed_scale)
 	anim_player.play_backwards("light")
 	await anim_player.animation_finished
 	if is_instance_valid(anim_player):
