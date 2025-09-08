@@ -1,0 +1,65 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://2d205hdsn8xk"]
+
+[ext_resource type="Texture2D" uid="uid://bh3ssr78sp3rb" path="res://assets/tree_branch_albedo.png" id="1_iwycu"]
+[ext_resource type="Texture2D" uid="uid://dghd71rgggvcj" path="res://assets/tree_branch_normal.png" id="2_xjrk8"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_o30s3"]
+texture = ExtResource("1_iwycu")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ta3qn"]
+texture = ExtResource("2_xjrk8")
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_iwycu"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_xjrk8"]
+constant = 0.95
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2 : source_color;
+uniform sampler2D tex_frg_3 : hint_normal;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// FloatConstant:5
+	float n_out5p0 = 0.950000;
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+// FloatConstant:4
+	float n_out4p0 = 1.000000;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ROUGHNESS = n_out5p0;
+	NORMAL_MAP = vec3(n_out3p0.xyz);
+	NORMAL_MAP_DEPTH = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-837.759, 44.8373)
+nodes/vertex/0/position = Vector2(480, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_o30s3")
+nodes/fragment/2/position = Vector2(-280, 80)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_ta3qn")
+nodes/fragment/3/position = Vector2(-380, 600)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatConstant_iwycu")
+nodes/fragment/4/position = Vector2(600, 520)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_xjrk8")
+nodes/fragment/5/position = Vector2(600, 280)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 9, 4, 0, 0, 10, 5, 0, 0, 3)
