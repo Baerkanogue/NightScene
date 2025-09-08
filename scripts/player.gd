@@ -32,9 +32,6 @@ func _physics_process(delta: float) -> void:
 	movement_hander(delta)
 	self.global_position.z = z_position
 	
-	#if self.is_on_floor():
-		#sine_transform(delta)
-		
 	feed_vec_to_shader()
 
 

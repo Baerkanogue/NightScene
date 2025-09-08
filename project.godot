@@ -24,7 +24,7 @@ Utils="*res://scripts/utils.gd"
 [display]
 
 window/size/always_on_top=true
-window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0
 
 [file_customization]
