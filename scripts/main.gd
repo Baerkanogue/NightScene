@@ -9,7 +9,7 @@ extends Node3D
 @export var print_infos: bool = false
 @export var light_strartup_delay: float = 1.0
 @export var show_intro: bool = true
-@export_range(0.0, 1.0, 0.01) var intro_speed_scale: float = 0.2
+@export_range(0.0, 1.0, 0.01) var intro_speed_scale: float = 1.0
 
 @onready var shader_text: RichTextLabel = $MainControl/ShaderText
 @onready var background: ColorRect = $MainControl/Background
@@ -17,7 +17,6 @@ extends Node3D
 
 func _ready() -> void:
 	check_nulls()
-	
 	var is_low_spec: bool = not is_system_capable()
 	
 	match force_mode:
@@ -26,12 +25,16 @@ func _ready() -> void:
 	
 	var args: Array = OS.get_cmdline_args()
 	for arg in args:
-		if arg == "-verbose":
-			print_infos = true
-		elif arg == "-force_mode_1":
-			is_low_spec = true
-		elif arg == "-force_mode_2":
-			is_low_spec = false
+		match arg:
+			"-verbose":
+				print_infos = true
+				continue
+			"-force_mode_1":
+				is_low_spec = true
+				continue
+			"-force_mode_2":
+				is_low_spec = false
+				continue
 		
 	if is_low_spec:
 		set_settings_low()
@@ -50,6 +53,8 @@ func _ready() -> void:
 		print_rich("[color=green]" + str(Engine.get_frames_per_second()) + " fps[/color]")
 	
 	if not show_intro:
+		shader_text.hide()
+		background.hide()
 		return
 	background.show()
 	shader_text.show()

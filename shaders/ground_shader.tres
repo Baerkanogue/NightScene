@@ -1,0 +1,56 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://rl14ex2hqty6"]
+
+[ext_resource type="Texture2D" uid="uid://vn4u1d31774h" path="res://assets/bricks_albedo.png" id="1_i8pmi"]
+[ext_resource type="Texture2D" uid="uid://bkl0jg6rc6wnj" path="res://assets/bricks_heightmap.png" id="2_thcyk"]
+[ext_resource type="Texture2D" uid="uid://dhmu27hifunn4" path="res://assets/bricks_normal.png" id="3_tufsr"]
+[ext_resource type="Texture2D" uid="uid://2otxpakvv6fd" path="res://assets/bricks_orm.png" id="4_ajs28"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_31jnb"]
+texture = ExtResource("1_i8pmi")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gx03e"]
+texture = ExtResource("2_thcyk")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wfg4r"]
+texture = ExtResource("3_tufsr")
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_0jwt2"]
+output_port_for_preview = 0
+texture = ExtResource("4_ajs28")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2 : source_color;
+uniform sampler2D tex_frg_4 : hint_normal;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Texture2D:4
+	vec4 n_out4p0 = texture(tex_frg_4, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	NORMAL_MAP = vec3(n_out4p0.xyz);
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_31jnb")
+nodes/fragment/2/position = Vector2(-140, 240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_gx03e")
+nodes/fragment/3/position = Vector2(54.65, 605.492)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_wfg4r")
+nodes/fragment/4/position = Vector2(54.65, 938.242)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_0jwt2")
+nodes/fragment/5/position = Vector2(-420, 1180)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 0, 0, 9)
