@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=4 uid="uid://esbpayh6jup3"]
+[gd_scene load_steps=19 format=4 uid="uid://esbpayh6jup3"]
 
 [ext_resource type="Texture2D" uid="uid://38bkhjchkl1l" path="res://assets/leaves_leaf_orange1.png" id="1_bs5xm"]
 [ext_resource type="Texture2D" uid="uid://f4r5uuh4bov2" path="res://assets/leaves_leaf_normal.png" id="2_val5e"]
 [ext_resource type="Texture2D" uid="uid://dmhqea6lc243" path="res://assets/leaves_leaf_orange0.png" id="3_k15js"]
 [ext_resource type="Texture2D" uid="uid://dk3iav3m5fs50" path="res://assets/leaves_leaf_green2.png" id="4_l0khd"]
 [ext_resource type="Texture2D" uid="uid://cw3c4d36jvsrx" path="res://assets/leaves_leaf_green1.png" id="5_ulcl4"]
-[ext_resource type="Texture2D" uid="uid://bomur0t6mf30g" path="res://assets/leaves_leaf_green0.png" id="6_dyfme"]
+[ext_resource type="ArrayMesh" uid="uid://dofox4c8hcgoo" path="res://assets/green_leaf_0.mesh" id="6_bs5xm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhopx"]
 resource_name = "OrangeLeaf1"
@@ -172,47 +172,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ytin6")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88ggu"]
-resource_name = "GreenLeaf0"
-cull_mode = 2
-albedo_texture = ExtResource("6_dyfme")
-normal_enabled = true
-normal_texture = ExtResource("2_val5e")
-uv1_scale = Vector3(0.54, 2.09, 1)
-uv1_offset = Vector3(0.23, -1.09, 0)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_8vjd6"]
-_surfaces = [{
-"aabb": AABB(-0.392212, -0.419236, -1.21874, 0.784424, 0.529653, 2.43748),
-"format": 34896613377,
-"index_count": 42,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIABAACAAUABgAEAAUABgAFAAcACAAGAAcACAAHAAkACgAIAAkACgAJAAsADAAKAAsADAALAA0ADgAMAA0ADgANAA8A"),
-"name": "GreenLeaf0",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 16,
-"vertex_data": PackedByteArray("40AKjGwmAACjgwAAAAAAABu/CoxsJgAAW3wAAAAAAAAGGRbRPkcAAPjmFtE+RwAAAADp98JtAAD//+n3wm0AAAAA//88kgAA/////zySAAAGGf//wLgAAPjm///AuAAA40D//5LZAAAbv///ktkAAFt8/////wAAo4P/////AAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_tbmak"]
-resource_name = "leaves_Plane"
-_surfaces = [{
-"aabb": AABB(-0.392212, -0.419236, -1.21874, 0.784424, 0.529653, 2.43748),
-"attribute_data": PackedByteArray("9HRJT6KAZDoKi0lPXH9kOvptImEEkiJhmWkUdmWWFHaZaeqJZZbqifpt3J4Ektye9HS1sAqLtbBcf5rFooCaxQ=="),
-"format": 34896613399,
-"index_count": 42,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIABAACAAUABgAEAAUABgAFAAcACAAGAAcACAAHAAkACgAIAAkACgAJAAsADAAKAAsADAALAA0ADgAMAA0ADgANAA8A"),
-"material": SubResource("StandardMaterial3D_88ggu"),
-"name": "GreenLeaf0",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 16,
-"vertex_data": PackedByteArray("40AKjGwmPtWjgwAAAABK2xu/CoxsJj7VW3wAAAAAStsGGRbRPkdVzPjmFtE+R1XMAADp98JtIsX//+n3wm0ixQAA//88kgvB/////zySC8EGGf//wLj/v/jm///AuP+/40D//5LZ/78bv///ktn/v1t8//////+/o4P//////7////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_8vjd6")
-
 [node name="leaves" type="Node3D"]
 
 [node name="OrangeLeaf1" type="MeshInstance3D" parent="."]
@@ -232,5 +191,5 @@ mesh = SubResource("ArrayMesh_a5r3o")
 skeleton = NodePath("")
 
 [node name="GreenLeaf0" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_tbmak")
+mesh = ExtResource("6_bs5xm")
 skeleton = NodePath("")
