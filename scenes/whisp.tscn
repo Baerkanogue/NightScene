@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://tlgb4hghn1i1"]
+[gd_scene load_steps=13 format=3 uid="uid://tlgb4hghn1i1"]
 
 [ext_resource type="Script" uid="uid://2o0jam4uui6g" path="res://scripts/player.gd" id="1_1oeoy"]
 [ext_resource type="Shader" uid="uid://c6qygjglnrp0e" path="res://shaders/whisp_shader.tres" id="1_xqbyk"]
@@ -33,6 +33,66 @@ height = 0.087
 radial_segments = 8
 rings = 4
 
+[sub_resource type="Animation" id="Animation_5swud"]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HoverArm/WhispMeshInstance3D/Eyes/MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.1, 1), Vector3(1, 1, 1), Vector3(1, 0.1, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HoverArm/WhispMeshInstance3D/Eyes/MeshInstance3D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.1, 1), Vector3(1, 1, 1), Vector3(1, 0.1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xoe4i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HoverArm/WhispMeshInstance3D/Eyes/MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HoverArm/WhispMeshInstance3D/Eyes/MeshInstance3D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fccep"]
+_data = {
+&"RESET": SubResource("Animation_xoe4i"),
+&"blink": SubResource("Animation_5swud")
+}
+
 [node name="Whisp" type="CharacterBody3D" node_paths=PackedStringArray("mesh_instance_3d")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_1oeoy")
@@ -52,9 +112,10 @@ gi_mode = 2
 mesh = SubResource("SphereMesh_sakoa")
 skeleton = NodePath("../..")
 
-[node name="Eyes" type="Node3D" parent="HoverArm/WhispMeshInstance3D" node_paths=PackedStringArray("whisp")]
+[node name="Eyes" type="Node3D" parent="HoverArm/WhispMeshInstance3D" node_paths=PackedStringArray("whisp", "animation_player")]
 script = ExtResource("3_sakoa")
 whisp = NodePath("../../..")
+animation_player = NodePath("../../../AnimationPlayer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HoverArm/WhispMeshInstance3D/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.139182, 0, -0.0300918)
@@ -73,3 +134,8 @@ light_size = 0.25
 light_cull_mask = 609
 omni_range = 1.0
 omni_attenuation = 0.7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fccep")
+}

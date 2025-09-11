@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var markers_node: Node3D
-@export var lerp_speed: float = 1.0
+@export var lerp_speed: float = 2.0
 @export var wait_time: float = 1.0
 
 var markers_array: Array[Marker3D]
@@ -46,4 +46,3 @@ func dragonfly(delta: float) -> void:
 
 func _on_pos_timer() -> void:
 	is_move_ready = true
-	print("e")
