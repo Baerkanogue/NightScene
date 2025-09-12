@@ -39,18 +39,17 @@ func _ready() -> void:
 	if is_low_spec:
 		set_settings_low()
 	
-	if OS.is_debug_build():
+	if not OS.is_debug_build():
 		print_rich("[color=web_gray]-verbose: Print infos\n-force_mode_1 = Force low fidelity\n-force_mode_2 = Force high fidelity\n[/color]")
+		show_intro = true
 		
 	if print_infos:
 		print_rich("[color=green]" + get_specs() + "[/color]")
 		var fps_clock: Timer = Timer.new()
-		self.add_child(fps_clock)
+		fps_clock.set_name("fps_clock")
+		self.add_child(fps_clock, true)
+		fps_clock.timeout.connect(_on_fps_clock)
 		fps_clock.start(5)
-		await fps_clock.timeout
-		if is_instance_valid(fps_clock):
-			fps_clock.queue_free()
-		print_rich("[color=green]" + str(Engine.get_frames_per_second()) + " fps[/color]")
 	
 	if not show_intro:
 		shader_text.hide()
@@ -80,7 +79,7 @@ func is_system_capable() -> bool:
 
 
 func get_specs() -> String:
-	var res: String = "GPU Type: {gpu_t}\nGPU Name: {gpu_n}\nCPU Name: {cpu_n}\nProcessors count: {p_count}\nMotherboard Name: {motherb}\nArchitechture: {bits}\nScreen Size: {s_size}\nScreen refresh rate: {s_rate}"
+	var res: String = "GPU Type: {gpu_t}\nGPU Name: {gpu_n}\nCPU Name: {cpu_n}\nProcessors count: {p_count}\nMotherboard Name: {motherb}\nArchitechture: {bits}\nScreen Size: {s_size}\nScreen refresh rate: {s_rate}\n"
 	
 	res = res.format({
 		"gpu_t": RenderingServer.get_video_adapter_type(),
@@ -121,13 +120,14 @@ func light_startup() -> void:
 	$Environment/EnvSpotLight3D,
 	$Geometry/Fountain/OmniLight3D,
 	$Geometry/Fountain/OmniLight3D2,
+	$Geometry/Ground/GroundOmniLight3D,
 	lamp_post_lamps[0],
 	lamp_post_lamps[1],
 ]
 	
-	var verif_count: int = 5
+	var verif_count: int = 6
 	if lights.size() != verif_count or not anim_player:
-		push_error("Error in light startup routine. Lights or animation player not found.")
+		push_error("Error in light startup routine. Lights or animation nodes found doesnt match the verif_count.")
 		return
 	
 	for light in lights:
@@ -164,3 +164,14 @@ func set_settings_low() -> void:
 	viewp.use_taa = false
 	viewp.use_debanding = false
 	viewp.anisotropic_filtering_level = Viewport.ANISOTROPY_DISABLED
+
+
+func _on_fps_clock() -> void:
+	var fps: int = int(Engine.get_frames_per_second())
+	var print_color: String = "green"
+	if fps < 60:
+		if fps < 30:
+			print_color = "red"
+		else:
+			print_color = "orange"
+	print_rich("[color=" + print_color + "]" + str(fps) + " fps[/color]")
