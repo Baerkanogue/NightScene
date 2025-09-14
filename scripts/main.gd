@@ -13,10 +13,16 @@ extends Node3D
 
 @onready var shader_text: RichTextLabel = $MainControl/ShaderText
 @onready var background: ColorRect = $MainControl/Background
+@onready var proximity_skybox: MeshInstance3D = $Environment/ProximitySkybox
+
+var show_more: bool = false
 
 
 func _ready() -> void:
 	check_nulls()
+	
+	if proximity_skybox:
+		proximity_skybox.show()
 	
 	var is_low_spec: bool = not is_system_capable()
 	match force_mode:
@@ -65,6 +71,24 @@ func _ready() -> void:
 	if is_instance_valid(intro_clock):
 		intro_clock.queue_free()
 	light_startup()
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("show_more"):
+		show_more = not show_more
+		show_more_stuff(show_more)
+
+
+func show_more_stuff(show_node: bool) -> void:
+	var nodes_to_show: Array[Node] = [
+		$Geometry/TestTorus,
+		$MainControl/Credits,
+	]
+	for node in nodes_to_show:
+		if show_node:
+			node.show()
+		else:
+			node.hide()
 
 
 func is_system_capable() -> bool:
