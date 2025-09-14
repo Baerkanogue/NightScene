@@ -17,12 +17,11 @@ extends Node3D
 
 func _ready() -> void:
 	check_nulls()
-	var is_low_spec: bool = not is_system_capable()
 	
+	var is_low_spec: bool = not is_system_capable()
 	match force_mode:
 		1: is_low_spec = true
 		2: is_low_spec = false
-	
 	var args: Array = OS.get_cmdline_args()
 	for arg in args:
 		match arg:
@@ -35,7 +34,6 @@ func _ready() -> void:
 			"-force_mode_2":
 				is_low_spec = false
 				continue
-		
 	if is_low_spec:
 		set_settings_low()
 	
@@ -55,6 +53,7 @@ func _ready() -> void:
 		shader_text.hide()
 		background.hide()
 		return
+	
 	background.show()
 	shader_text.show()
 	var intro_clock: Timer = Timer.new()
