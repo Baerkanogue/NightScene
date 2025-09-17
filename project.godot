@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Portofolio"
+config/name="NightScene"
 run/main_scene="uid://dd6tfjvemfxu"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=240
 boot_splash/show_image=false
 config/icon="uid://bfsbc5ep0mivh"
